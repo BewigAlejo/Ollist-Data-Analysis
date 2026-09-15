@@ -144,6 +144,24 @@ From this point, the dataset is ready for the **data profiling and quality asses
 
 ---
 
+## Historia del análisis
+
+El trabajo realizado hasta ahora está documentado en el notebook [01_data_profiling.ipynb](notebooks/01_data_profiling.ipynb). Se descargaron las nueve tablas del dataset y se elaboró un perfil inicial de su tamaño, tipos de datos, valores faltantes y filas duplicadas. Después, el análisis se centró en la tabla de pedidos para evaluar si sus fechas y estados describen un proceso de entrega coherente.
+
+### Calidad de datos
+
+La revisión de valores faltantes mostró que muchas fechas ausentes son esperables en pedidos cancelados o que todavía no llegaron a esa etapa. También se encontraron excepciones en pedidos marcados como `delivered`:
+
+- 14 no tienen fecha de aprobación, aunque registran despacho y entrega.
+- 2 no tienen fecha de entrega al transportista.
+- 8 no tienen fecha de entrega al cliente.
+
+Las fechas se convirtieron a `datetime` para comprobar la secuencia esperada **compra → aprobación → transportista → cliente**. No se encontraron aprobaciones anteriores a la compra, pero sí 1.359 pedidos entregados al transportista antes de su aprobación y 23 con una entrega al cliente anterior a la registrada para el transportista.
+
+Los casos se investigaron según el estado del pedido y las fechas disponibles. Se conservaron los valores faltantes cuando no había evidencia para reconstruirlos; en particular, la fecha estimada de entrega no se usó como sustituto de la fecha real. Las inconsistencias cronológicas siguen siendo anomalías potenciales: sus diferencias de tiempo requieren más análisis antes de definir un tratamiento.
+
+---
+
 ## Project Workflow
 
 The project will follow these stages:
