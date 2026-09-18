@@ -234,6 +234,34 @@ Para evitar que las relaciones de uno a muchos multipliquen filas y generen sobr
 
 Estas tablas dejan los datos preparados para la siguiente etapa: el análisis exploratorio de ventas, clientes, productos, vendedores, logística, reseñas y recurrencia.
 
+### EDA con pandas
+
+El análisis exploratorio está documentado en [02_eda.ipynb](notebooks/02_eda.ipynb). Para mantener comparables las métricas económicas y operativas, se trabajó principalmente con pedidos `delivered` y se utilizaron las tablas analíticas construidas en la etapa anterior.
+
+#### ¿Cuál es el volumen general de operaciones de Olist?
+
+Se calcularon los principales indicadores de pedidos, clientes, ítems, pagos, productos y fletes. De los 99.441 pedidos registrados, 96.478 fueron entregados (97,02 %). Estos pedidos suman 15,42 millones en pagos, con un ticket promedio de 159,86, y contienen 110.197 ítems. El flete total representa aproximadamente el 14,25 % del valor pagado.
+
+#### ¿Cómo evolucionaron los pedidos y el valor pagado?
+
+Se agruparon los pedidos entregados por mes para comparar su cantidad, el valor pagado y el ticket promedio. La actividad creció durante 2017 y alcanzó su máximo en noviembre, con 7.289 pedidos y 1,15 millones pagados; en 2018 se mantuvo generalmente entre 6.000 y 7.000 pedidos mensuales. La correlación de 0,996 entre pedidos y valor pagado indica que el crecimiento económico estuvo asociado principalmente al aumento del volumen de órdenes.
+
+#### ¿Qué categorías venden más y cuáles generan mayor valor?
+
+Se compararon ítems, pedidos, productos, valor vendido, flete y precio promedio por categoría. `bed_bath_table` lidera el volumen con 10.953 ítems, mientras que `health_beauty` genera el mayor valor, con aproximadamente 1,23 millones. `watches_gifts` ocupa el segundo lugar por valor pese a vender menos unidades, debido a su mayor precio promedio. Esto muestra que volumen y contribución económica deben evaluarse por separado.
+
+#### ¿Dónde se concentran los clientes, los pedidos y el valor pagado?
+
+Se analizaron clientes, pedidos entregados, pagos y ticket promedio por estado. São Paulo concentra el 41,98 % de los pedidos, pero el 37,41 % del valor pagado y presenta un ticket promedio de 142,48, inferior al promedio general. Junto con Rio de Janeiro y Minas Gerais reúne cerca de dos tercios de los pedidos y más del 60 % del valor pagado, lo que evidencia una fuerte concentración regional.
+
+#### ¿Cuánto tardan las entregas y qué proporción llega tarde?
+
+Se calcularon el tiempo de entrega y la diferencia entre la fecha real y la estimada para 96.470 pedidos con información completa. La entrega tarda en promedio 12,56 días y el 91,89 % llega en fecha o antes; el pedido típico se entrega cerca de 12 días antes de lo previsto. El 8,11 % llegó tarde y, dentro de ese grupo, el retraso medio fue de 9,55 días, con algunos casos extremos cercanos a 189 días.
+
+#### ¿Los retrasos están asociados con peores puntuaciones?
+
+Se compararon 95.824 pedidos con datos válidos de entrega y reseña. Los pedidos en fecha obtuvieron una puntuación media de 4,29 y un 9,19 % de reviews bajas, frente a 2,57 y 53,99 % en los pedidos tardíos. La puntuación desciende conforme aumenta el retraso y la correlación entre días de demora y review es de -0,267. Los resultados muestran una asociación relevante entre incumplimiento logístico y menor satisfacción, aunque no demuestran causalidad por sí solos.
+
 ---
 
 ## Project Workflow
